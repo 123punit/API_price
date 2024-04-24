@@ -36,7 +36,7 @@ public class PriceStepDefinition {
 		if (Statuscode == 404) {
 			System.out.println(url);
 		} else {
-			System.out.println("Url is valid");
+			System.out.println("Url is Invalid");
 		}
 	}
 
@@ -48,7 +48,7 @@ public class PriceStepDefinition {
 		if (Statuscode == 200) {
 			System.out.println(url.getBody().asString());
 		} else {
-			System.out.println("Url is valid");
+			System.out.println("Url is Invalid");
 		}
 	}
 

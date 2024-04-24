@@ -6,6 +6,7 @@ import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
+import junit.framework.Assert;
 
 public class PriceStepDefinition {
 	public static Response response = null;
@@ -34,6 +35,7 @@ public class PriceStepDefinition {
 		System.out.println(url.getBody().asString());
 		int Statuscode = url.getStatusCode();
 		if (Statuscode == 404) {
+			Assert.assertEquals(Statuscode, 404);
 			System.out.println(url);
 		} else {
 			System.out.println("Url is Invalid");
@@ -46,6 +48,7 @@ public class PriceStepDefinition {
 		System.out.println(url.getBody().asString());
 		int Statuscode = url.getStatusCode();
 		if (Statuscode == 200) {
+			Assert.assertEquals(Statuscode, 200);
 			System.out.println(url.getBody().asString());
 		} else {
 			System.out.println("Url is Invalid");
@@ -64,6 +67,7 @@ public class PriceStepDefinition {
 		System.out.println(res.getBody().asString());
 		Float value = res.jsonPath().getFloat("rates.AED");
 		if (!(value < 3.6 && value > 3.7)) {
+			Assert.assertEquals(3.6725, value,3.6725);
 			System.out.println("value is = " + value);
 		} else {
 			System.out.println("Value is greater than 3.7 and less than 3.6");
@@ -75,10 +79,12 @@ public class PriceStepDefinition {
 		Response res = RestAssured.get(url);
 		System.out.println(res.getBody().asString());
 		String[] count = res.jsonPath().get("rates").toString().split(",");
-		if (count.length == 162) {
-			System.out.println(count.length);
+		int totalCount = count.length;
+		if (totalCount == 162) {
+			Assert.assertEquals(totalCount, 162);
+			System.out.println(totalCount);
 		} else {
-			System.out.println(count.length + "does not match");
+			System.out.println(totalCount + "does not match");
 		}
 	}
 
